@@ -1,6 +1,7 @@
 {
   "name": "barcodes-generator",
   "description": "Generates barcodes",
+  "repository": "https://github.com/bdeinsalyon/barcode-generator.git",
   "addons": [
     "mongolab:sandbox"
   ],
