@@ -80,7 +80,7 @@ function getRandoms(req, callback) {
             req.db.collection('codes').insertMany(added);
 
             callback(null, added.map(function (item) {
-                return "c" + item.value;
+                return "c" +  utils.zeroPad(item.value);
             }));
         });
     }
