@@ -1,0 +1,19 @@
+{
+  "name": "barcode-generator",
+  "version": "1.0.0",
+  "description": "Generates unique barcode numbers",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdeinsalyon/barcode-generator.git"
+  },
+  "author": "Gabriel Augendre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bdeinsalyon/barcode-generator/issues"
+  },
+  "homepage": "https://github.com/bdeinsalyon/barcode-generator#readme"
+}
