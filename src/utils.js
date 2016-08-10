@@ -5,8 +5,9 @@
  * @returns {number} The generated random number.
  */
 function generateRandom() {
-    let value = Math.random() * Math.pow(10, 12);
-    if (Math.floor(value / Math.pow(10, 11)) == 0) {
+    let length = 12;
+    let value = Math.random() * Math.pow(10, length);
+    if (Math.floor(value / Math.pow(10, length - 1)) == 0) {
         value *= 10;
     }
     return Math.floor(value);
