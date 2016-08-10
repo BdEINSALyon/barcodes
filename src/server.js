@@ -1,16 +1,37 @@
 'use strict';
 
 const utils = require('./utils');
+const config = require('./config');
 
-const express = require('express');
-const app = express();
+const app = require('express')();
 module.exports = app;
+
+const expressMongoDb = require('express-mongo-db');
+app.use(expressMongoDb(config.db.url));
 
 app.get('/:number', function (req, res) {
     let uniques = new Set();
-    while (uniques.size < req.params.number) {
-        uniques.add(utils.random());
-    }
-    console.log([...uniques]);
-    res.send([...uniques]);
+    let added  = [];
+    let codes = req.db.collection('codes').find();
+
+    let number = Number(req.params.number);
+
+    codes.forEach(function (item) {
+        uniques.add(item.value);
+    }, function () {
+        let size = uniques.size;
+        while (uniques.size < size + number) {
+            let rand = utils.random();
+            if (!uniques.has(rand)) {
+                uniques.add(rand);
+                added.push({
+                    value: rand
+                });
+            }
+        }
+        req.db.collection('codes').insertMany(added);
+        res.send(added.map(function (item) {
+            return item.value;
+        }));
+    });
 });
