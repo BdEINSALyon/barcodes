@@ -1,21 +1,24 @@
 'use strict';
 
-const usage = "Usage : /{number} where number is an integer between 1 and 1000";
-
+const path = require('path');
 const utils = require('./utils');
 const config = require('./config');
 
 const csv = require('express-csv');
-const app = require('express')();
+const express = require('express');
+const app = express();
 module.exports = app;
 
 const expressMongoDb = require('express-mongo-db');
 app.use(expressMongoDb(config.db.url));
 
+const staticDir = path.join(__dirname, 'static');
+const staticOptions = {root: staticDir};
+
 app.get('/:number', function (req, res) {
     getRandoms(req, function (err, randoms) {
         if (err) {
-            res.send(err);
+            res.sendFile('usage.html', staticOptions);
         }
         else {
             res.send(randoms);
@@ -23,10 +26,10 @@ app.get('/:number', function (req, res) {
     })
 });
 
-app.get('/:number/csv', function (req, res) {
+app.get('/csv/:number', function (req, res) {
     getRandoms(req, function (err, randoms) {
         if (err) {
-            res.send(err);
+            res.sendFile('usage.html', staticOptions);
         }
         else {
             // Format for CSV : one array for each line
@@ -38,8 +41,8 @@ app.get('/:number/csv', function (req, res) {
     })
 });
 
-app.get('/', function (req, res) {
-    res.send(usage);
+app.get('*', function (req, res) {
+    res.sendFile('usage.html', staticOptions);
 });
 
 
@@ -82,6 +85,6 @@ function getRandoms(req, callback) {
         });
     }
     else {
-        callback(usage);
+        callback(new Error("Invalid parameter"));
     }
 }
