@@ -1,0 +1,12 @@
+{
+  "name": "barcodes-generator",
+  "description": "Generates barcodes",
+  "addons": [
+    "mongolab:sandbox"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
