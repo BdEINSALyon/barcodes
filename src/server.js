@@ -31,7 +31,7 @@ app.get('/:number', function (req, res) {
         }
         req.db.collection('codes').insertMany(added);
         res.send(added.map(function (item) {
-            return item.value;
+            return "c" + item.value;
         }));
     });
 });
