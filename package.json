@@ -1,5 +1,5 @@
 {
-  "name": "barcode-generator",
+  "name": "barcodes-generator",
   "version": "1.0.0",
   "description": "Generates unique barcode numbers",
   "main": "src/bin/www.js",
