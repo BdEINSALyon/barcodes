@@ -1,5 +1,7 @@
 'use strict';
 
+const upLimit = 5000;
+
 const path = require('path');
 const utils = require('./utils');
 const config = require('./config');
@@ -57,7 +59,7 @@ function getRandoms(req, callback) {
      */
     let number = Number(req.params.number);
 
-    if (number > 0 && number <= 1000) {
+    if (number > 0 && number <= upLimit) {
         let codes = req.db.collection('codes').find();
 
         codes.forEach(function (item) {
